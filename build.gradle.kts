@@ -15,10 +15,17 @@ repositories {
 dependencies {
     implementation(compose.desktop.currentOs)
     implementation("org.jetbrains.compose.material3:material3-desktop:1.4.3")
+    implementation("org.junit.jupiter:junit-jupiter:5.8.1")
+    testRuntimeOnly("org.junit.platform:junit-platform-launcher")
 }
 
 compose.desktop {
     application {
         mainClass = "MainKt"
     }
+}
+
+//This Test entry is required so that JUnit can find the tests
+tasks.test {
+    useJUnitPlatform()
 }
