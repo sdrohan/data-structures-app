@@ -9,10 +9,9 @@ import datastructures.CustomQueue
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun QueueScreen() {
+fun QueueScreen(queue: CustomQueue<String>) {
 
     var inputText by remember { mutableStateOf("") }
-    val queue by remember { mutableStateOf(CustomQueue<String>()) }
 
     Column(Modifier.padding(16.dp))
     {
@@ -36,6 +35,14 @@ fun QueueScreen() {
             inputText = ""
         }) {
             Text("Enqueue")
+        }
+
+        Button(onClick = { queue.dequeue() }) {
+            Text("Dequeue")
+        }
+
+        Button(onClick = { while (!queue.isEmpty()) queue.dequeue() }) {
+            Text("Clear")
         }
 
         Text("Queue Size: ${queue.size()}")
