@@ -1,8 +1,6 @@
 package datastructures
 
-import LIFOStack
 import interfaces.Stack
-import lifoStackOf
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
