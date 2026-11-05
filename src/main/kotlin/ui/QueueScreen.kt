@@ -1,6 +1,8 @@
 package ui
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Info
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -12,6 +14,7 @@ import datastructures.CustomQueue
 fun QueueScreen(queue: CustomQueue<String>) {
 
     var inputText by remember { mutableStateOf("") }
+    var isPopupVisible by remember { mutableStateOf(false) }
 
     Column(Modifier.padding(16.dp))
     {
@@ -20,6 +23,12 @@ fun QueueScreen(queue: CustomQueue<String>) {
             "Queue",
             style = MaterialTheme.typography.headlineLarge,
             color = MaterialTheme.colorScheme.onBackground
+        )
+
+        ExtendedFloatingActionButton(
+            icon = { Icon(Icons.Filled.Info, contentDescription = "Info") },
+            text = { Text("Info") },
+            onClick = { isPopupVisible = !isPopupVisible }
         )
 
         OutlinedTextField(
@@ -62,4 +71,15 @@ fun QueueScreen(queue: CustomQueue<String>) {
         }
 
     }
+
+    DropdownMenu(
+        expanded = isPopupVisible,
+        onDismissRequest = { isPopupVisible = false },
+        modifier = Modifier.padding(16.dp)
+    ) {
+        Text("What is a Queue?", style = MaterialTheme.typography.bodyMedium)
+        Spacer(modifier = Modifier.height(8.dp))
+        Text("Add your own definition here!  \nInclude what it is, how it's used and when would you use it, with examples")
+    }
+
 }
