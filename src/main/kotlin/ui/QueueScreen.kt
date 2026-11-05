@@ -15,6 +15,7 @@ fun QueueScreen(queue: CustomQueue<String>) {
 
     Column(Modifier.padding(16.dp))
     {
+        Spacer(modifier = Modifier.height(64.dp))
         Text(
             "Queue",
             style = MaterialTheme.typography.headlineLarge,
@@ -28,21 +29,26 @@ fun QueueScreen(queue: CustomQueue<String>) {
             modifier = Modifier.fillMaxWidth(),
         )
 
-        Button(onClick = {
-            if (inputText.isNotBlank()) {
-                queue.enqueue(inputText)
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+        ) {
+            Button(onClick = {
+                if (inputText.isNotBlank()) {
+                    queue.enqueue(inputText)
+                }
+                inputText = ""
+            }) {
+                Text("Enqueue")
             }
-            inputText = ""
-        }) {
-            Text("Enqueue")
-        }
 
-        Button(onClick = { queue.dequeue() }) {
-            Text("Dequeue")
-        }
+            Button(onClick = { queue.dequeue() }) {
+                Text("Dequeue")
+            }
 
-        Button(onClick = { while (!queue.isEmpty()) queue.dequeue() }) {
-            Text("Clear")
+            Button(onClick = { while (!queue.isEmpty()) queue.dequeue() }) {
+                Text("Clear")
+            }
         }
 
         Text("Queue Size: ${queue.size()}")
